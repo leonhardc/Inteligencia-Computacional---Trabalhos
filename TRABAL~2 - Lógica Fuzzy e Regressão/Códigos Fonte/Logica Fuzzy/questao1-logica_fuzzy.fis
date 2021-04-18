@@ -1,0 +1,49 @@
+[System]
+Name='questao1-logica_fuzzy'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=4
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='PressaoNoPedal'
+Range=[0 100]
+NumMFs=3
+MF1='Baixo':'trimf',[-40 0 50]
+MF2='Medio':'trimf',[30 50 70]
+MF3='Alto':'trimf',[50 100 140]
+
+[Input2]
+Name='VelocidadeDaRoda'
+Range=[0 100]
+NumMFs=3
+MF1='Devagar':'trimf',[-40 0 60]
+MF2='Medio':'trimf',[20 50 80]
+MF3='Rapido':'trimf',[40 100 140]
+
+[Input3]
+Name='VelocidadeDoCarro'
+Range=[0 100]
+NumMFs=3
+MF1='DevagarCar':'trimf',[-40 0 60]
+MF2='MedioCar':'trimf',[19.7354497354497 49.7354497354497 79.7354497354497]
+MF3='RapidoCar':'trimf',[40 100 140]
+
+[Output1]
+Name='PressaoFreio'
+Range=[0 100]
+NumMFs=2
+MF1='LiberarFreio':'trimf',[-40 0 100]
+MF2='ApertarFreio':'trimf',[0 100 140]
+
+[Rules]
+2 0 0, 2 (1) : 1
+3 3 3, 2 (1) : 1
+3 1 3, 1 (1) : 1
+1 0 0, 1 (1) : 1

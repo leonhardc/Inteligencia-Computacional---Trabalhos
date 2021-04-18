@@ -1,0 +1,43 @@
+%   Descrição: Retorna o custo de uma configuração de tabuleiro
+%   calculado quantas rainhas estão se atacando multuamente. 
+%
+%   Variáveis:
+%   S => configuração de tabuleiro a qual vai ser calculado seu custo
+%   
+%   
+%   Exemplo de uso:
+%   custo(a)
+
+function CdeS = custo( S )
+% CdeS => custo de S retonado pela função
+% Elaboração da Função:
+% Primeiro: identificar onde estão as rainhas (os valores 1)
+% Segundo: Identificar quantos ataques existem
+
+C = []; % Matriz que guarda as posições das rainhas no tabuleiro
+tam = size(S);
+N = tam(1);
+
+% Identificar as posições das rainhas no tabuleiro
+for j = 1:1:N
+    for i = 1:1:N
+        if S(i,j) == 1
+            b = [i j];
+            C = [C;b];
+        end    
+    end
+end
+% Fim da fase de identificação das posições das rainhas
+
+% Operar sobre a matriz C para saber quantas rainhas estão se atacando
+CdeS = 0; % custo a ser retornado
+for i = 1:1:N
+    for j = 1:1:N
+        if ((C(i,1)==C(j,1)) || (C(j,1)-C(i,1) == C(j,2)-C(i,2) || C(j,1)-C(i,1) == (-1)*(C(j,2) - C(i,2) ) ) ) && i~=j 
+            CdeS = CdeS + 1;  % Incremente o contador caso as rainhas se ataquem
+        end 
+    end 
+end 
+CdeS = CdeS/2; % o custo real de quantos PARES de rainhas estão se atacando e não quantos ataques existem
+end
+
